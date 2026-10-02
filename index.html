@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MCTiers Style - WalrusTears</title>
+  <title>WalrusTears - MCTiers Style Tier List</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #0d1117; color: #c9d1d9; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: #0b0e14; color: #d1d5db; font-family: system-ui, -apple-system, sans-serif; }
     
-    /* Custom Tier Color Styles like MCTiers */
-    .tier-ht1 { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border: 1px solid #f87171; }
-    .tier-lt1 { background: linear-gradient(135deg, #ea580c 0%, #9a3412 100%); border: 1px solid #fb923c; }
-    .tier-ht2 { background: linear-gradient(135deg, #d97706 0%, #92400e 100%); border: 1px solid #fbbf24; }
-    .tier-lt2 { background: linear-gradient(135deg, #ca8a04 0%, #854d0e 100%); border: 1px solid #facc15; }
-    .tier-ht3 { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); border: 1px solid #60a5fa; }
+    /* Tier Gradients like MCTiers */
+    .tier-ht1 { background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%); border: 1px solid #ef4444; }
+    .tier-lt1 { background: linear-gradient(135deg, #c2410c 0%, #7c2d12 100%); border: 1px solid #f97316; }
+    .tier-ht2 { background: linear-gradient(135deg, #b45309 0%, #713f12 100%); border: 1px solid #f59e0b; }
+    .tier-lt2 { background: linear-gradient(135deg, #a16207 0%, #613807 100%); border: 1px solid #eab308; }
+    .tier-ht3 { background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%); border: 1px solid #3b82f6; }
+    .tier-lt3 { background: linear-gradient(135deg, #0284c7 0%, #075985 100%); border: 1px solid #38bdf8; }
   </style>
 </head>
 <body class="p-3 md:p-6 min-h-screen flex flex-col justify-between">
@@ -25,93 +26,86 @@
         <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center font-black text-xl text-white shadow-lg">WT</div>
         <div>
           <h1 class="text-xl font-black tracking-wider text-white">WALRUSTEARS</h1>
-          <p class="text-xs text-gray-500">Official Community Tier List</p>
+          <p class="text-xs text-gray-400">Official Community Tier List</p>
         </div>
       </div>
 
-      <!-- Gamemodes Tabs (MCTiers Style) -->
-      <div class="flex gap-1.5 bg-gray-900/80 p-1.5 rounded-xl border border-gray-800/80 overflow-x-auto w-full md:w-auto">
-        <button onclick="switchMode('Sword')" id="btn-Sword" class="gm-btn px-4 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white shadow">Sword</button>
-        <button onclick="switchMode('Crystal')" id="btn-Crystal" class="gm-btn px-4 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Crystal</button>
-        <button onclick="switchMode('Axe')" id="btn-Axe" class="gm-btn px-4 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Axe</button>
-        <button onclick="switchMode('Nethpot')" id="btn-Nethpot" class="gm-btn px-4 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Nethpot</button>
-        <button onclick="switchMode('SMP')" id="btn-SMP" class="gm-btn px-4 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">SMP</button>
+      <!-- Gamemodes Tabs (Overall, Mace, Sword, etc.) -->
+      <div class="flex gap-1.5 bg-gray-900/90 p-1.5 rounded-xl border border-gray-800 overflow-x-auto w-full md:w-auto">
+        <button onclick="switchMode('Overall')" id="btn-Overall" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white shadow">Overall</button>
+        <button onclick="switchMode('Mace')" id="btn-Mace" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Mace</button>
+        <button onclick="switchMode('Sword')" id="btn-Sword" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Sword</button>
+        <button onclick="switchMode('Crystal')" id="btn-Crystal" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Crystal</button>
+        <button onclick="switchMode('Axe')" id="btn-Axe" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Axe</button>
+        <button onclick="switchMode('Nethpot')" id="btn-Nethpot" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">Nethpot</button>
+        <button onclick="switchMode('SMP')" id="btn-SMP" class="gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white">SMP</button>
       </div>
     </header>
 
-    <!-- Filter Bar -->
-    <div class="max-w-7xl mx-auto mb-6 flex flex-col sm:flex-row gap-3 justify-between items-center bg-gray-900/40 p-3 rounded-xl border border-gray-800">
-      <input type="text" id="search" onkeyup="renderCards()" placeholder="Search player..." class="bg-gray-900 border border-gray-800 text-xs px-3 py-2 rounded-lg text-white w-full sm:w-64 focus:outline-none focus:border-red-500">
+    <!-- Filters Bar -->
+    <div class="max-w-7xl mx-auto mb-6 flex flex-col sm:flex-row gap-3 justify-between items-center bg-gray-900/50 p-3 rounded-xl border border-gray-800/80">
+      <input type="text" id="search" onkeyup="renderCards()" placeholder="Search player name..." class="bg-gray-950 border border-gray-800 text-xs px-3.5 py-2 rounded-lg text-white w-full sm:w-64 focus:outline-none focus:border-red-500">
       
-      <div class="flex gap-2 w-full sm:w-auto">
-        <select id="region" onchange="renderCards()" class="bg-gray-900 border border-gray-800 text-xs px-3 py-2 rounded-lg text-gray-300 focus:outline-none focus:border-red-500">
-          <option value="ALL">All Regions</option>
-          <option value="NA">NA (North America)</option>
-          <option value="EU">EU (Europe)</option>
-          <option value="AS">AS (Asia)</option>
-        </select>
-      </div>
+      <select id="region" onchange="renderCards()" class="bg-gray-950 border border-gray-800 text-xs px-3.5 py-2 rounded-lg text-gray-300 focus:outline-none focus:border-red-500 w-full sm:w-auto">
+        <option value="ALL">All Regions</option>
+        <option value="NA">NA (North America)</option>
+        <option value="EU">EU (Europe)</option>
+        <option value="AS">AS (Asia)</option>
+      </select>
     </div>
 
-    <!-- Tier-by-Tier Grid Container (MCTiers.com Layout) -->
+    <!-- Tier-by-Tier Cards Grid -->
     <main id="tier-grid" class="max-w-7xl mx-auto space-y-6">
-      <!-- Dynamic Tiers Loaded Here -->
+      <!-- Dynamic Data Inserted Here -->
     </main>
   </div>
 
   <footer class="text-center text-gray-600 text-xs py-8">
-    © WalrusTears • Inspired by MCTiers
+    © WalrusTears Tier List • Powered by Vercel
   </footer>
 
   <script>
-    // Database Structured Tier-wise
+    // MCTiers-style Player Tier Database
     const database = {
+      Overall: {
+        'HT1 (High Tier 1)': [{ name: 'htap', region: 'NA' }, { name: 'ClownPierce', region: 'EU' }],
+        'LT1 (Low Tier 1)': [{ name: 'Walrus', region: 'NA' }, { name: 'Minemanner', region: 'AS' }],
+        'HT2 (High Tier 2)': [{ name: 'Coldness', region: 'NA' }]
+      },
+      Mace: {
+        'HT1 (High Tier 1)': [{ name: 'htap', region: 'NA' }],
+        'LT1 (Low Tier 1)': [{ name: 'ClownPierce', region: 'EU' }]
+      },
       Sword: {
-        'HT1 (High Tier 1)': [
-          { name: 'Walrus', region: 'NA' },
-          { name: 'ClownPierce', region: 'EU' }
-        ],
-        'LT1 (Low Tier 1)': [
-          { name: 'Minemanner', region: 'AS' },
-          { name: 'Marlow', region: 'NA' }
-        ],
-        'HT2 (High Tier 2)': [
-          { name: 'Coldness', region: 'NA' }
-        ]
+        'HT1 (High Tier 1)': [{ name: 'htap', region: 'NA' }, { name: 'Walrus', region: 'NA' }],
+        'LT1 (Low Tier 1)': [{ name: 'Minemanner', region: 'AS' }],
+        'HT2 (High Tier 2)': [{ name: 'Coldness', region: 'NA' }]
       },
       Crystal: {
-        'HT1 (High Tier 1)': [
-          { name: 'Minemanner', region: 'AS' }
-        ],
-        'LT1 (Low Tier 1)': [
-          { name: 'Walrus', region: 'NA' }
-        ]
+        'HT1 (High Tier 1)': [{ name: 'Minemanner', region: 'AS' }, { name: 'htap', region: 'NA' }],
+        'LT1 (Low Tier 1)': [{ name: 'Walrus', region: 'NA' }]
       },
       Axe: {
-        'HT1 (High Tier 1)': [
-          { name: 'ClownPierce', region: 'EU' }
-        ]
+        'HT1 (High Tier 1)': [{ name: 'ClownPierce', region: 'EU' }, { name: 'htap', region: 'NA' }]
       },
       Nethpot: {
-        'HT1 (High Tier 1)': [
-          { name: 'Marlow', region: 'NA' }
-        ]
+        'HT1 (High Tier 1)': [{ name: 'htap', region: 'NA' }],
+        'LT1 (Low Tier 1)': [{ name: 'Walrus', region: 'NA' }]
       },
       SMP: {
-        'HT1 (High Tier 1)': [
-          { name: 'ClownPierce', region: 'EU' }
-        ]
+        'HT1 (High Tier 1)': [{ name: 'htap', region: 'NA' }, { name: 'ClownPierce', region: 'EU' }]
       }
     };
 
-    let activeMode = 'Sword';
+    let activeMode = 'Overall';
 
-    function getTierStyle(tierName) {
-      if (tierName.startsWith('HT1')) return 'tier-ht1';
-      if (tierName.startsWith('LT1')) return 'tier-lt1';
-      if (tierName.startsWith('HT2')) return 'tier-ht2';
-      if (tierName.startsWith('LT2')) return 'tier-lt2';
-      return 'tier-ht3';
+    function getTierStyle(tier) {
+      if (tier.startsWith('HT1')) return 'tier-ht1';
+      if (tier.startsWith('LT1')) return 'tier-lt1';
+      if (tier.startsWith('HT2')) return 'tier-ht2';
+      if (tier.startsWith('LT2')) return 'tier-lt2';
+      if (tier.startsWith('HT3')) return 'tier-ht3';
+      return 'tier-lt3';
     }
 
     function renderCards() {
@@ -136,7 +130,7 @@
           const tierStyle = getTierStyle(tierName);
 
           let playerCardsHTML = players.map(p => `
-            <div class="bg-gray-900 border border-gray-800/80 rounded-xl p-2.5 flex items-center gap-3 hover:border-gray-700 transition shadow-md">
+            <div class="bg-gray-900 border border-gray-800 rounded-xl p-2.5 flex items-center gap-3 hover:border-gray-700 transition shadow-md">
               <img src="https://mc-heads.net/avatar/${p.name}/40" class="w-10 h-10 rounded-lg bg-gray-800 shadow" alt="${p.name}">
               <div class="overflow-hidden">
                 <h4 class="font-bold text-sm text-white truncate">${p.name}</h4>
@@ -147,12 +141,9 @@
 
           const tierBlock = `
             <div class="bg-gray-900/30 border border-gray-800/60 rounded-2xl p-4">
-              <!-- Tier Label Badge -->
               <div class="inline-block px-3 py-1 rounded-lg text-xs font-black shadow-lg mb-3 ${tierStyle}">
                 ${tierName}
               </div>
-              
-              <!-- Cards Grid -->
               <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 ${playerCardsHTML}
               </div>
@@ -171,9 +162,9 @@
     function switchMode(mode) {
       activeMode = mode;
       document.querySelectorAll('.gm-btn').forEach(btn => {
-        btn.className = 'gm-btn px-4 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white';
+        btn.className = 'gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg text-gray-400 hover:text-white';
       });
-      document.getElementById(`btn-${mode}`).className = 'gm-btn px-4 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white shadow';
+      document.getElementById(`btn-${mode}`).className = 'gm-btn px-3.5 py-1.5 text-xs font-bold rounded-lg bg-red-600 text-white shadow';
       renderCards();
     }
 
