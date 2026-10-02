@@ -3,104 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WalrusTears - Minecraft Tier List</title>
+  <title>WalrusTears - Interactive Tier List</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { background-color: #0b0f19; color: #f3f4f6; font-family: sans-serif; }
+    body { background-color: #0b0f19; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
   </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-8 min-h-screen flex flex-col justify-between">
 
-  <!-- Header Section -->
-  <header class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center pb-6 mb-6 border-b border-gray-800 gap-4">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-cyan-600 rounded-lg flex items-center justify-center font-black text-xl text-white">WT</div>
-      <h1 class="text-2xl font-black tracking-wider text-cyan-400">WALRUSTEARS</h1>
+  <div>
+    <!-- Header -->
+    <header class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center pb-6 mb-6 border-b border-gray-800 gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-cyan-600 rounded-lg flex items-center justify-center font-black text-xl text-white shadow-lg">WT</div>
+        <h1 class="text-2xl font-black tracking-wider text-cyan-400">WALRUSTEARS</h1>
+      </div>
+      
+      <!-- Gamemode Tabs -->
+      <div id="gamemode-tabs" class="flex gap-2 bg-gray-900 p-1.5 rounded-xl border border-gray-800 text-sm overflow-x-auto w-full md:w-auto">
+        <button onclick="switchGamemode('Sword')" id="btn-Sword" class="gm-btn px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg shadow transition">Sword</button>
+        <button onclick="switchGamemode('Crystal')" id="btn-Crystal" class="gm-btn px-4 py-2 text-gray-400 hover:text-white transition">Crystal</button>
+        <button onclick="switchGamemode('Axe')" id="btn-Axe" class="gm-btn px-4 py-2 text-gray-400 hover:text-white transition">Axe</button>
+        <button onclick="switchGamemode('Nethpot')" id="btn-Nethpot" class="gm-btn px-4 py-2 text-gray-400 hover:text-white transition">Nethpot</button>
+      </div>
+    </header>
+
+    <!-- Controls: Search + Region Filter -->
+    <div class="max-w-5xl mx-auto mb-4 flex flex-col sm:flex-row gap-3 justify-between">
+      <input type="text" id="search-input" onkeyup="filterPlayers()" placeholder="Search player name..." class="bg-gray-900 border border-gray-800 px-4 py-2 rounded-xl text-sm w-full sm:w-64 focus:outline-none focus:border-cyan-500">
+      
+      <select id="region-filter" onchange="filterPlayers()" class="bg-gray-900 border border-gray-800 px-4 py-2 rounded-xl text-sm text-gray-300 focus:outline-none focus:border-cyan-500">
+        <option value="ALL">All Regions</option>
+        <option value="NA">North America (NA)</option>
+        <option value="EU">Europe (EU)</option>
+        <option value="AS">Asia (AS)</option>
+      </select>
     </div>
-    
-    <!-- Gamemode Selector -->
-    <div class="flex gap-2 bg-gray-900 p-1.5 rounded-xl border border-gray-800 text-sm overflow-x-auto w-full md:w-auto">
-      <button class="px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg shadow">Sword</button>
-      <button class="px-4 py-2 text-gray-400 hover:text-white transition">Crystal</button>
-      <button class="px-4 py-2 text-gray-400 hover:text-white transition">Axe</button>
-      <button class="px-4 py-2 text-gray-400 hover:text-white transition">Pot</button>
-    </div>
-  </header>
 
-  <!-- Leaderboard Container -->
-  <main class="max-w-5xl mx-auto bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
-    <div class="overflow-x-auto">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider border-b border-gray-800">
-            <th class="p-4">Rank</th>
-            <th class="p-4">Player</th>
-            <th class="p-4">Tier</th>
-            <th class="p-4">Region</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-800/60 text-sm">
-          
-          <!-- Player Row 1 -->
-          <tr class="hover:bg-gray-800/40 transition">
-            <td class="p-4 font-black text-cyan-400">#1</td>
-            <td class="p-4 flex items-center gap-3 font-semibold">
-              <img src="https://mc-heads.net/avatar/Walrus/32" class="w-8 h-8 rounded-md shadow" alt="Walrus">
-              Walrus
-            </td>
-            <td class="p-4">
-              <span class="px-3 py-1 rounded-md text-xs font-black bg-red-600 text-white shadow">HT1</span>
-            </td>
-            <td class="p-4 text-gray-400 font-medium">NA</td>
-          </tr>
-
-          <!-- Player Row 2 -->
-          <tr class="hover:bg-gray-800/40 transition">
-            <td class="p-4 font-black text-gray-500">#2</td>
-            <td class="p-4 flex items-center gap-3 font-semibold">
-              <img src="https://mc-heads.net/avatar/ClownPierce/32" class="w-8 h-8 rounded-md shadow" alt="ClownPierce">
-              ClownPierce
-            </td>
-            <td class="p-4">
-              <span class="px-3 py-1 rounded-md text-xs font-black bg-red-600 text-white shadow">HT1</span>
-            </td>
-            <td class="p-4 text-gray-400 font-medium">EU</td>
-          </tr>
-
-          <!-- Player Row 3 -->
-          <tr class="hover:bg-gray-800/40 transition">
-            <td class="p-4 font-black text-gray-500">#3</td>
-            <td class="p-4 flex items-center gap-3 font-semibold">
-              <img src="https://mc-heads.net/avatar/Minemanner/32" class="w-8 h-8 rounded-md shadow" alt="Minemanner">
-              Minemanner
-            </td>
-            <td class="p-4">
-              <span class="px-3 py-1 rounded-md text-xs font-black bg-orange-600 text-white shadow">LT1</span>
-            </td>
-            <td class="p-4 text-gray-400 font-medium">AS</td>
-          </tr>
-
-          <!-- Player Row 4 -->
-          <tr class="hover:bg-gray-800/40 transition">
-            <td class="p-4 font-black text-gray-500">#4</td>
-            <td class="p-4 flex items-center gap-3 font-semibold">
-              <img src="https://mc-heads.net/avatar/Coldness/32" class="w-8 h-8 rounded-md shadow" alt="Coldness">
-              Coldness
-            </td>
-            <td class="p-4">
-              <span class="px-3 py-1 rounded-md text-xs font-black bg-amber-600 text-white shadow">HT2</span>
-            </td>
-            <td class="p-4 text-gray-400 font-medium">NA</td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-  </main>
+    <!-- Leaderboard Table -->
+    <main class="max-w-5xl mx-auto bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider border-b border-gray-800">
+              <th class="p-4">Rank</th>
+              <th class="p-4">Player</th>
+              <th class="p-4">Tier</th>
+              <th class="p-4">Region</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body" class="divide-y divide-gray-800/60 text-sm">
+            <!-- Dynamic JavaScript Data Inserted Here -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
 
   <footer class="text-center text-gray-600 text-xs mt-8">
-    © WalrusTears Tier List • Powered by Vercel
+    © WalrusTears Tier List • Live Automated Leaderboard
   </footer>
 
+  <!-- JavaScript for Interactive Functions -->
+  <script>
+    // Player Database
+    const playersData = {
+      Sword: [
+        { rank: 1, name: 'Walrus', tier: 'HT1', region: 'NA' },
+        { rank: 2, name: 'ClownPierce', tier: 'HT1', region: 'EU' },
+        { rank: 3, name: 'Minemanner', tier: 'LT1', region: 'AS' },
+        { rank: 4, name: 'Coldness', tier: 'HT2', region: 'NA' }
+      ],
+      Crystal: [
+        { rank: 1, name: 'Minemanner', tier: 'HT1', region: 'AS' },
+        { rank: 2, name: 'Marlow', tier: 'HT1', region: 'NA' },
+        { rank: 3, name: 'Walrus', tier: 'LT1', region: 'NA' }
+      ],
+      Axe: [
+        { rank: 1, name: 'ClownPierce', tier: 'HT1', region: 'EU' },
+        { rank: 2, name: 'Coldness', tier: 'LT1', region: 'NA' }
+      ],
+      Nethpot: [
+        { rank: 1, name: 'Marlow', tier: 'HT1', region: 'NA' },
+        { rank: 2, name: 'Walrus', tier: 'HT2', region: 'NA' }
+      ]
+    };
+
+    let currentMode = 'Sword';
+
+    function getTierBadgeClass(tier) {
+      if (tier.startsWith('HT1')) return 'bg-red-600 text-white';
+      if (tier.startsWith('LT1')) return 'bg-orange-600 text-white';
+      if (tier.startsWith('HT2')) return 'bg-amber-600 text-white';
+      return 'bg-gray-700 text-white';
+    }
+
+    function renderLeaderboard(data) {
+      const tbody = document.getElementById('leaderboard-body');
+      tbody.innerHTML = '';
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500">No players found.</td></tr>`;
+        return;
+      }
+
+      data.forEach(p => {
+        const row = `
+          <tr class="hover:bg-gray-800/40 transition">
+            <td class="p-4 font-black ${p.rank === 1 ? 'text-cyan-400' : 'text-gray-500'}">#${p.rank}</td>
+            <td class="p-4 flex items-center gap-3 font-semibold">
+              <img src="https://mc-heads.net/avatar/${p.name}/32" class="w-8 h-8 rounded-md shadow" alt="${p.name}">
+              ${p.name}
+            </td>
+            <td class="p-4">
+              <span class="px-3 py-1 rounded-md text-xs font-black shadow ${getTierBadgeClass(p.tier)}">${p.tier}</span>
+            </td>
+            <td class="p-4 text-gray-400 font-medium">${p.region}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function switchGamemode(mode) {
+      currentMode = mode;
+      
+      // Update Button Styles
+      document.querySelectorAll('.gm-btn').forEach(btn => {
+        btn.className = 'gm-btn px-4 py-2 text-gray-400 hover:text-white transition';
+      });
+      document.getElementById(`btn-${mode}`).className = 'gm-btn px-4 py-2 bg-cyan-600 text-white font-bold rounded-lg shadow transition';
+
+      filterPlayers();
+    }
+
+    function filterPlayers() {
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const region = document.getElementById('region-filter').value;
+
+      let filtered = playersData[currentMode].filter(p => {
+        const matchesSearch = p.name.toLowerCase().includes(search);
+        const matchesRegion = region === 'ALL' || p.region === region;
+        return matchesSearch && matchesRegion;
+      });
+
+      renderLeaderboard(filtered);
+    }
+
+    // Initial Load
+    renderLeaderboard(playersData['Sword']);
+  </script>
 </body>
 </html>
